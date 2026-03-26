@@ -1,0 +1,32 @@
+# 🚀 Déploiement d'un Serveur DHCP sous Debian 12 (Projet E5)
+
+Ce dépôt documente l'installation, la configuration et la résolution de problèmes rencontrés lors de la mise en place d'un service DHCP dans un environnement virtualisé **Proxmox**.
+
+---
+
+#🛠️ 1. Environnement Technique
+**Hyperviseur :** Proxmox VE (hébergé sur VirtualBox 7.x)
+**OS Serveur :** Debian 13 "Trixie" (Netinst amd64)
+**Service :** `isc-dhcp-server`
+**Réseau Privé (LAN) :** `192.168.10.0/24`
+**Interface LAN :** `ens18` (IP Fixe : `192.168.10.1`)
+
+---
+
+## 📋 2. Étapes d'Installation
+
+### A. Installation de l'OS
+L'installation a été réalisée en **mode texte** (ncurses) pour garantir la stabilité de l'affichage en environnement virtualisé et optimiser les ressources système (RAM/CPU).
+
+**Sélection des logiciels :**
+- [x] SSH Server
+- [x] Standard System Utilities
+- [ ] Debian Desktop Environment (GNOME/KDE désactivés)
+
+### B. Configuration de l'IP Statique
+Fichier modifié : `/etc/network/interfaces`
+```bash
+auto ens18
+iface ens18 inet static
+    address 192.168.10.1
+    netmask 255.255.255.0
